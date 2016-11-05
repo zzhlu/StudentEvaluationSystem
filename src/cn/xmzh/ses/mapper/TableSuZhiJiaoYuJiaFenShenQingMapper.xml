@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xmzh.ses.mapper.TableSuZhiJiaoYuJiaFenShenQingMapper">
+	<resultMap id="resultMap" type="tableSuZhiJiaoYuJiaFenShenQing">
+		<id column="id" property="id" />
+		<result column="suzhi" property="suzhi" />
+		<result column="name" property="name" />
+		<result column="type" property="type" />
+		<result column="time" property="time" />
+		<result column="level" property="level" />
+		<result column="evidence" property="evidence" />
+		<result column="filePath" property="filePath" />
+		<result column="score" property="score" />
+		<result column="isvalid" property="isvalid" />
+	</resultMap>
+	<insert id="addToTable">
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO
+		t_suzhijiafenshenqingbiao(`suzhi`)
+		VALUES(#{suzhi})
+	</insert>
+	<delete id="deleteByID" parameterType="int">
+		DELETE FROM
+		t_suzhijiafenshenqingbiao
+		WHERE id=#{id}
+	</delete>
+	<update id="updateTableData" parameterType="tableSuZhiJiaoYuJiaFenShenQing">
+		UPDATE
+		t_suzhijiafenshenqingbiao
+		SET
+		name=#{name},
+		type=#{type},
+		time=#{time},
+		level=#{level},
+		evidence=#{evidence},
+		filePath=#{filePath},
+		score=#{score},
+		isvalid=#{isvalid}
+		WHERE id=#{id}
+	</update>
+	<select id="findBySZJYJFTableID" parameterType="int" resultMap="resultMap">
+		SELECT * FROM
+		t_suzhijiafenshenqingbiao
+		WHERE suzhi=#{value}
+	</select>
+	<select id="findByID" parameterType="int" resultMap="resultMap">
+		SELECT *
+		FROM
+		t_suzhijiafenshenqingbiao
+		WHERE id=#{value}
+	</select>
+</mapper>

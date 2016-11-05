@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xmzh.ses.mapper.TermMapper">
+	<select id="findAllTerm" resultType="term">
+		SELECT * FROM t_tongjixueqi
+	</select>
+	<select id="findTermById" parameterType="int" resultType="term">
+		SELECT
+		* FROM
+		t_tongjixueqi WHERE id=#{value}
+	</select>
+	<select id="findTermByXueQi" parameterType="string" resultType="term">
+		SELECT * FROM
+		t_tongjixueqi WHERE xueqi=#{value}
+	</select>
+	<insert id="addTerm" parameterType="term">
+		<selectKey keyColumn="id" keyProperty="id" resultType="int"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO
+		t_tongjixueqi(createTime, xueqi) VALUES(#{createTime},
+		#{xueqi})
+	</insert>
+</mapper>

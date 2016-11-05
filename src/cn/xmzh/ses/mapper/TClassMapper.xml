@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xmzh.ses.mapper.TClassMapper">
+	<insert id="addTableData" parameterType="tClass">
+		INSERT INTO
+		t_class(classid, major, xueyuan)
+		VALUES(#{classid},#{major},#{xueyuan})
+	</insert>
+	<delete id="deleteByClassID" parameterType="string">
+		DELETE FROM t_class
+		WHERE calssid=#{classid}
+	</delete>
+	<update id="updateTableData" parameterType="tClass">
+		UPDATE t_class SET
+		major=#{major}, xueyuan=#{xueyuan}
+		WHERE
+		classid=#{classid}
+	</update>
+	<select id="findAllClass" resultType="tClass">
+		SELECT * FROM t_class
+	</select>
+	<select id="findByClassID" parameterType="string" resultType="tClass">
+		SELECT * FROM t_class WHERE classid=#{classid}
+	</select>
+	<select id="findByTermID" parameterType="int" resultType="tClass">
+		SELECT
+		* FROM t_class WHERE classid IN (
+		SELECT DISTINCT stu.classid
+		FROM
+		t_zonghecepingchengjitongjibiao zh, t_student stu
+		WHERE
+		xueqi=#{value}
+		AND zh.sno=stu.sno);
+	</select>
+</mapper>
