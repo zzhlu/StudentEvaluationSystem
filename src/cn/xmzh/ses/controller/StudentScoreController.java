@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.xmzh.ses.pojo.Student;
+import cn.xmzh.ses.pojo.TableSuZhiJiaoYuJiaFenPingFen;
 import cn.xmzh.ses.pojo.TableSuZhiJiaoYuJiaFenShenQing;
 import cn.xmzh.ses.pojo.TableZongHeCePingChengJiTongJi;
 import cn.xmzh.ses.pojo.Term;
@@ -48,7 +49,11 @@ public class StudentScoreController {
 	private TableSuZhiXueFenRiChangXingWeiBuFenPingFenService tableSuZhiXueFenRiChangXingWeiBuFenPingFenService;
 
 	@RequestMapping("/scoreMaintainPage")
-	public String scoreMaintainPage() throws Exception {
+	public String scoreMaintainPage(HttpServletRequest request, Model model)
+			throws Exception {
+		Student student = (Student) request.getSession().getAttribute("user");
+		model.addAttribute("list", tableSuZhiJiaoYuJiaFenShenQingService
+				.findBySno(student.getSno()));
 		return "student/scoreMaintain";
 	}
 
@@ -85,7 +90,9 @@ public class StudentScoreController {
 					.findTableBySNOAndXUEQI(tj);
 			if (tj == null)
 				throw new Exception("奖项时间有误，不能参与学期评分！");
-			record.setZonghe(tj.getId());
+			TableSuZhiJiaoYuJiaFenPingFen sz = tableSuZhiJiaoYuJiaFenPingFenService
+					.findByZongHe(tj.getId());
+			record.setSuzhi(sz.getId());
 			String rootPath = request.getSession().getServletContext()
 					.getRealPath("/");
 			String subPath = File.separator
@@ -100,6 +107,7 @@ public class StudentScoreController {
 			file.transferTo(outFile);
 			record.setFilePath(subPath);
 			tableSuZhiJiaoYuJiaFenShenQingService.addToTable(record);
+			tableSuZhiJiaoYuJiaFenShenQingService.updateTableData(record);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			model.addAttribute("tip", e.getMessage());

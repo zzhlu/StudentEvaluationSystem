@@ -1,5 +1,6 @@
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -32,13 +33,9 @@
 	<!-- Content begins -->
 	<div id="content">
 		<div class="contentTop">
-			<span class="pageTitle"><span class="icon-screen"></span>主页</span>
+			<span class="pageTitle"><span class="icon-screen"></span>我的成绩详情</span>
 			<div class="clear"></div>
 		</div>
-
-
-
-
 		<!-- Main content -->
 		<div class="wrapper">
 			<!-- Media table sample -->
@@ -49,138 +46,37 @@
 					<h6>我的加分项</h6>
 					<div class="clear"></div>
 				</div>
-				<table cellpadding="0" cellspacing="0" width="100%"
-					class="tDefault checkAll tMedia" id="checkAll">
-					<thead>
+				<table class="tDefault checkAll" id="checkAll">
+					<thead style="width: 100%">
 						<tr>
-							<td><img src="images/elements/other/tableArrows.png" alt="" /></td>
-							<td width="50">Image</td>
-							<td class="sortCol"><div>
-									Description<span></span>
-								</div></td>
-							<td width="130" class="sortCol"><div>
-									Date<span></span>
-								</div></td>
-							<td width="120">File info</td>
-							<td width="100">Actions</td>
+							<td style="width: 5%"></td>
+							<td style="width: 5%">序号</td>
+							<td style="width: 20%">参加比赛或担任职务名称</td>
+							<td style="width: 10%">素质教育加分类别</td>
+							<td style="width: 10%">时间</td>
+							<td style="width: 10%">级别</td>
+							<td style="width: 20%">加分依据(获奖证书或相关证明)</td>
+							<td style="width: 10%">分数</td>
+							<td style="width: 10%">操作</td>
 						</tr>
 					</thead>
-					<tfoot>
-						<tr>
-							<td colspan="6">
-								<div class="itemActions">
-									<label>Apply action:</label> <select>
-										<option value="">Select action...</option>
-										<option value="Edit">Edit</option>
-										<option value="Delete">Delete</option>
-										<option value="Move">Move somewhere</option>
-									</select>
-								</div>
-								<div class="tPages">
-									<ul class="pages">
-										<li class="prev"><a href="#" title=""><span
-												class="icon-arrow-14"></span></a></li>
-										<li><a href="#" title="" class="active">1</a></li>
-										<li><a href="#" title="">2</a></li>
-										<li><a href="#" title="">3</a></li>
-										<li><a href="#" title="">4</a></li>
-										<li><a href="#" title="">5</a></li>
-										<li><a href="#" title="">6</a></li>
-										<li>...</li>
-										<li><a href="#" title="">20</a></li>
-										<li class="next"><a href="#" title=""><span
-												class="icon-arrow-17"></span></a></li>
-									</ul>
-								</div>
-							</td>
-						</tr>
-					</tfoot>
 					<tbody>
-						<tr>
-							<td><input type="checkbox" name="checkRow" /></td>
-							<td><a href="images/big.png" title="" class="lightbox"><img
-									src="images/live/face1.png" alt="" /></a></td>
-							<td class="textL"><a href="#" title="">Image1
-									description</a></td>
-							<td>Feb 12, 2012. 12:28</td>
-							<td class="fileInfo"><span><strong>Size:</strong> 215
-									Kb</span><span><strong>Format:</strong> .jpg</span></td>
-							<td class="tableActs"><a href="#"
-								class="tablectrl_small bDefault tipS" title="Edit"><span
-									class="iconb" data-icon="&#xe1db;"></span></a> <a href="#"
-								class="tablectrl_small bDefault tipS" title="Remove"><span
-									class="iconb" data-icon="&#xe136;"></span></a> <a href="#"
-								class="tablectrl_small bDefault tipS" title="Options"><span
-									class="iconb" data-icon="&#xe1f7;"></span></a></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" name="checkRow" /></td>
-							<td><a href="images/big.png" title="" class="lightbox"><img
-									src="images/live/face1.png" alt="" /></a></td>
-							<td class="textL"><a href="#" title="">Image1
-									description</a></td>
-							<td>Feb 12, 2012. 12:28</td>
-							<td class="fileInfo"><span><strong>Size:</strong> 215
-									Kb</span><span><strong>Format:</strong> .jpg</span></td>
-							<td class="tableActs"><a href="#"
-								class="tablectrl_small bDefault tipS" title="Edit"><span
-									class="iconb" data-icon="&#xe1db;"></span></a> <a href="#"
-								class="tablectrl_small bDefault tipS" title="Remove"><span
-									class="iconb" data-icon="&#xe136;"></span></a> <a href="#"
-								class="tablectrl_small bDefault tipS" title="Options"><span
-									class="iconb" data-icon="&#xe1f7;"></span></a></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" name="checkRow" /></td>
-							<td><a href="images/big.png" title="" class="lightbox"><img
-									src="images/live/face1.png" alt="" /></a></td>
-							<td class="textL"><a href="#" title="">Image1
-									description</a></td>
-							<td>Feb 12, 2012. 12:28</td>
-							<td class="fileInfo"><span><strong>Size:</strong> 215
-									Kb</span><span><strong>Format:</strong> .jpg</span></td>
-							<td class="tableActs"><a href="#"
-								class="tablectrl_small bDefault tipS" title="Edit"><span
-									class="iconb" data-icon="&#xe1db;"></span></a> <a href="#"
-								class="tablectrl_small bDefault tipS" title="Remove"><span
-									class="iconb" data-icon="&#xe136;"></span></a> <a href="#"
-								class="tablectrl_small bDefault tipS" title="Options"><span
-									class="iconb" data-icon="&#xe1f7;"></span></a></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" name="checkRow" /></td>
-							<td><a href="images/big.png" title="" class="lightbox"><img
-									src="images/live/face1.png" alt="" /></a></td>
-							<td class="textL"><a href="#" title="">Image1
-									description</a></td>
-							<td>Feb 12, 2012. 12:28</td>
-							<td class="fileInfo"><span><strong>Size:</strong> 215
-									Kb</span><span><strong>Format:</strong> .jpg</span></td>
-							<td class="tableActs"><a href="#"
-								class="tablectrl_small bDefault tipS" title="Edit"><span
-									class="iconb" data-icon="&#xe1db;"></span></a> <a href="#"
-								class="tablectrl_small bDefault tipS" title="Remove"><span
-									class="iconb" data-icon="&#xe136;"></span></a> <a href="#"
-								class="tablectrl_small bDefault tipS" title="Options"><span
-									class="iconb" data-icon="&#xe1f7;"></span></a></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" name="checkRow" /></td>
-							<td><a href="images/big.png" title="" class="lightbox"><img
-									src="images/live/face1.png" alt="" /></a></td>
-							<td class="textL"><a href="#" title="">Image1
-									description</a></td>
-							<td>Feb 12, 2012. 12:28</td>
-							<td class="fileInfo"><span><strong>Size:</strong> 215
-									Kb</span><span><strong>Format:</strong> .jpg</span></td>
-							<td class="tableActs"><a href="#"
-								class="tablectrl_small bDefault tipS" title="Edit"><span
-									class="iconb" data-icon="&#xe1db;"></span></a> <a href="#"
-								class="tablectrl_small bDefault tipS" title="Remove"><span
-									class="iconb" data-icon="&#xe136;"></span></a> <a href="#"
-								class="tablectrl_small bDefault tipS" title="Options"><span
-									class="iconb" data-icon="&#xe1f7;"></span></a></td>
-						</tr>
+						<c:forEach var="var" items="${list }" varStatus="index">
+							<tr>
+								<td><input type="checkbox" name="${var.id }"
+									value="${var.id }" /></td>
+								<td style="width: 5%">${index.count }</td>
+								<td style="width: 5%">${var.name }</td>
+								<td style="width: 20%">${var.type }</td>
+								<td style="width: 10%">${var.time }</td>
+								<td style="width: 10%">${var.level }</td>
+								<td style="width: 20%">${var.evidence }</td>
+								<td style="width: 10%">${var.score }</td>
+								<td class="tableActs" style="width: 10%"><a href="#"
+									class="tablectrl_small bDefault tipS" title="删除"><span
+										class="iconb" data-icon="&#xe136;"></span></a></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>

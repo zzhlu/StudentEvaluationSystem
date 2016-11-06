@@ -26,7 +26,7 @@ public class TableSuZhiJiaoYuJiaFenShenQing {
 			String name, String type, String time, String level,
 			String evidence, String filePath, Double score, String isvalid) {
 		this.id = id;
-		this.suzhi = suzhi;
+		this.setSuzhi(suzhi);
 		this.name = name;
 		this.type = type;
 		this.time = time;
@@ -45,20 +45,20 @@ public class TableSuZhiJiaoYuJiaFenShenQing {
 		this.id = id;
 	}
 
-	public Integer getZonghe() {
-		return suzhi;
-	}
-
-	public void setZonghe(Integer suzhi) {
-		this.suzhi = suzhi;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getSuzhi() {
+		return suzhi;
+	}
+
+	public void setSuzhi(Integer suzhi) {
+		this.suzhi = suzhi;
 	}
 
 	public String getType() {

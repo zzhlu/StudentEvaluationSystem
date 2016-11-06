@@ -42,7 +42,7 @@ public class TableSuZhiJiaoYuJiaFenPingFenServiceImpl implements
 	}
 
 	@Override
-	public List<TableSuZhiJiaoYuJiaFenPingFen> findByZongHe(Integer id)
+	public TableSuZhiJiaoYuJiaFenPingFen findByZongHe(Integer id)
 			throws Exception {
 		return tableSuZhiJiaoYuJiaFenPingFenMapper.findByZongHe(id);
 	}

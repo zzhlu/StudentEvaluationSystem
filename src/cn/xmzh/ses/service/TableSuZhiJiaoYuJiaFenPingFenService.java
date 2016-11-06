@@ -1,7 +1,5 @@
 package cn.xmzh.ses.service;
 
-import java.util.List;
-
 import cn.xmzh.ses.pojo.TableSuZhiJiaoYuJiaFenPingFen;
 
 /**
@@ -53,7 +51,7 @@ public interface TableSuZhiJiaoYuJiaFenPingFenService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<TableSuZhiJiaoYuJiaFenPingFen> findByZongHe(Integer id)
+	public TableSuZhiJiaoYuJiaFenPingFen findByZongHe(Integer id)
 			throws Exception;
 
 }

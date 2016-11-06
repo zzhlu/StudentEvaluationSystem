@@ -1,7 +1,5 @@
 package cn.xmzh.ses.mapper;
 
-import java.util.List;
-
 import cn.xmzh.ses.pojo.TableSuZhiJiaoYuJiaFenPingFen;
 
 /**
@@ -53,6 +51,6 @@ public interface TableSuZhiJiaoYuJiaFenPingFenMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<TableSuZhiJiaoYuJiaFenPingFen> findByZongHe(Integer id)
+	public TableSuZhiJiaoYuJiaFenPingFen findByZongHe(Integer id)
 			throws Exception;
 }

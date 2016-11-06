@@ -45,14 +45,18 @@
 		isvalid=#{isvalid}
 		WHERE id=#{id}
 	</update>
-	<select id="findByID" parameterType="int" resultMap="resultMap">
+	<select id="findByID" parameterType="int"
+		resultType="tableSuZhiJiaoYuJiaFenPingFen">
 		SELECT *
 		FROM t_suzhijiaoyujiafenpingfenbiao
-		WHERE id=#{value}
+		WHERE
+		id=#{value}
 	</select>
-	<select id="findByZongHe" parameterType="int" resultMap="resultMap">
+	<select id="findByZongHe" parameterType="int"
+		resultType="tableSuZhiJiaoYuJiaFenPingFen">
 		SELECT *
 		FROM t_suzhijiaoyujiafenpingfenbiao
-		WHERE zonghe=#{value}
+		WHERE
+		zonghe=#{value}
 	</select>
 </mapper>

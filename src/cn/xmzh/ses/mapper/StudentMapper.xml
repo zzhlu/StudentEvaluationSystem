@@ -84,8 +84,7 @@
 		fatherPhone=#{fatherPhone},
 		motherName=#{motherName},
 		motherPhone=#{motherPhone},
-		photoPath=#{photoPath},
-		password=#{password}
+		photoPath=#{photoPath}
 		WHERE sno=#{sno}
 	</update>
 	<update id="updateStudentPassword" parameterType="student">
