@@ -1,4 +1,5 @@
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -71,7 +72,11 @@
 						<tr>
 							<td><label>时间:</label></td>
 							<td><div class="formRow">
-									<input type="text" name="time" placeholder="时间" />
+									<select name="time">
+										<c:forEach var="item" items="${termList }" varStatus="index">
+											<option value="${item.xueqi }">${item.xueqi }</option>
+										</c:forEach>
+									</select>
 								</div></td>
 							<td><label>分数:</label></td>
 							<td><div class="formRow">

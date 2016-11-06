@@ -38,21 +38,40 @@ public interface TableSuZhiJiaoYuJiaFenShenQingMapper {
 			throws Exception;
 
 	/**
-	 * 根据素质教育加分评分表的ID查询所有的记录
+	 * 查询所有的加分申请表
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<TableSuZhiJiaoYuJiaFenShenQing> findAll() throws Exception;
+
+	/**
+	 * 根据ID查询其中某一条记录
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public TableSuZhiJiaoYuJiaFenShenQing findByID(Integer id) throws Exception;
+
+	/**
+	 * 根据学生的学号查询其所有的加分项
 	 * 
 	 * @param sno
 	 * @return
 	 * @throws Exception
 	 */
-	public List<TableSuZhiJiaoYuJiaFenShenQing> findBySZJYJFTableID(String sno)
+	public List<TableSuZhiJiaoYuJiaFenShenQing> findBySno(String sno)
 			throws Exception;
 
 	/**
-	 * 根据ID查询申请表
+	 * 根据学生的学号和学期查询其所有的加分项
 	 * 
+	 * @param sno
 	 * @return
 	 * @throws Exception
 	 */
-	public TableSuZhiJiaoYuJiaFenShenQing findByID(Integer id) throws Exception;
+	public List<TableSuZhiJiaoYuJiaFenShenQing> findBySnoAndXueQi(String sno)
+			throws Exception;
 
 }

@@ -1,6 +1,7 @@
 package cn.xmzh.ses.controller;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +58,9 @@ public class StudentScoreController {
 	}
 
 	@RequestMapping("/editScoreApplyPage")
-	public String editProfilePage() throws Exception {
+	public String editProfilePage(Model model) throws Exception {
+		List<Term> termList = termService.findAllTerm();
+		model.addAttribute("termList", termList);
 		return "student/editScoreApply";
 	}
 
@@ -85,9 +88,14 @@ public class StudentScoreController {
 			record.setZonghe(tj.getId());
 			String rootPath = request.getSession().getServletContext()
 					.getRealPath("/");
-			String subPath = File.separator + "WEB-INF" + File.separator
-					+ "file" + File.separator + UUID.randomUUID()
-					+ file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+			String subPath = File.separator
+					+ "WEB-INF"
+					+ File.separator
+					+ "file"
+					+ File.separator
+					+ UUID.randomUUID()
+					+ file.getOriginalFilename().substring(
+							file.getOriginalFilename().lastIndexOf("."));
 			File outFile = new File(rootPath + subPath);
 			file.transferTo(outFile);
 			record.setFilePath(subPath);

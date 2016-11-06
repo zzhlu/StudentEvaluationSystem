@@ -20,22 +20,41 @@ public class TableSuZhiJiaoYuJiaFenShenQingServiceImpl implements
 	private TableSuZhiJiaoYuJiaFenShenQingMapper tableSuZhiJiaoYuJiaFenShenQingMapper;
 
 	@Override
-	public void addToTable(TableSuZhiJiaoYuJiaFenShenQing table)
+	public void addToTable(TableSuZhiJiaoYuJiaFenShenQing record)
 			throws Exception {
+		tableSuZhiJiaoYuJiaFenShenQingMapper.addToTable(record);
+	}
+
+	@Override
+	public void deleteByID(Integer id) throws Exception {
+		tableSuZhiJiaoYuJiaFenShenQingMapper.deleteByID(id);
+	}
+
+	@Override
+	public void updateTableData(TableSuZhiJiaoYuJiaFenShenQing record)
+			throws Exception {
+		tableSuZhiJiaoYuJiaFenShenQingMapper.updateTableData(record);
 	}
 
 	@Override
 	public List<TableSuZhiJiaoYuJiaFenShenQing> findAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return tableSuZhiJiaoYuJiaFenShenQingMapper.findAll();
 	}
 
 	@Override
 	public List<TableSuZhiJiaoYuJiaFenShenQing> findBySno(String sno)
 			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return tableSuZhiJiaoYuJiaFenShenQingMapper.findBySno(sno);
 	}
 
+	@Override
+	public List<TableSuZhiJiaoYuJiaFenShenQing> findBySnoAndXueQi(String sno)
+			throws Exception {
+		return tableSuZhiJiaoYuJiaFenShenQingMapper.findBySnoAndXueQi(sno);
+	}
 
+	@Override
+	public TableSuZhiJiaoYuJiaFenShenQing findByID(Integer id) throws Exception {
+		return tableSuZhiJiaoYuJiaFenShenQingMapper.findByID(id);
+	}
 }
