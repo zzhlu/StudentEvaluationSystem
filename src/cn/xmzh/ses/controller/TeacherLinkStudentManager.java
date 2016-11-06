@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import cn.xmzh.ses.pojo.Page;
 import cn.xmzh.ses.pojo.Student;
+import cn.xmzh.ses.pojo.TClass;
 import cn.xmzh.ses.service.ExcelFileService;
 import cn.xmzh.ses.service.StudentService;
 import cn.xmzh.ses.service.TClassService;
@@ -92,11 +93,25 @@ public class TeacherLinkStudentManager {
 	@RequestMapping("/addStudentByExcel")
 	public String addStudentByExcel(Model model, MultipartFile file)
 			throws IOException, Exception {
-		List<Student> stuList = excelFileService.parseExcelFile(
-				file.getInputStream(), Student.class);
-		for (Student student : stuList) {
-			if (student.getSno() != null && !"".equals(student.getSno()))
-				studentService.addStudent(student);
+		try {
+			if (file == null || file.isEmpty())
+				throw new Exception("未上传文件！");
+			List<Student> stuList = excelFileService.parseExcelFile(
+					file.getInputStream(), Student.class);
+			for (Student student : stuList) {
+				if (student.getSno() != null && !"".equals(student.getSno())) {
+					if (tClassService.findByClassID(student.getClassid()) == null)
+						// 班级不存在需要创建班级
+						tClassService.addTableData(new TClass(student
+								.getClassid(), "计算机科学与技术专业", "信息科学与工程学院"));
+					student.setPassword("123");
+					studentService.addStudent(student);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			model.addAttribute("tip", e.getMessage());
+			e.printStackTrace();
 		}
 		return "teacher/addStudentByExcel";
 	}

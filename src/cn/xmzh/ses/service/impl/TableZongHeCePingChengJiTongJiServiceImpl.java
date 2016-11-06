@@ -73,4 +73,10 @@ public class TableZongHeCePingChengJiTongJiServiceImpl implements
 				.findTableByClassIDAndXUEQIDESC(record);
 	}
 
+	@Override
+	public List<TableZongHeCePingChengJiTongJi> findTableByXUEQI(
+			TableZongHeCePingChengJiTongJi record) throws Exception {
+		return tableZongHeCePingChengJiTongJiMapper.findTableByXUEQI(record);
+	}
+
 }

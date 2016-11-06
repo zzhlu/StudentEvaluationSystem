@@ -50,9 +50,11 @@ public class TeacherLinkEvaluation {
 	 * 打开列出评分页面
 	 * 
 	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping("/listEvaluationPage")
-	public String listEvaluationPage() {
+	public String listEvaluationPage(Model model) throws Exception {
+		model.addAttribute("termList", termService.findAllTerm());
 		return "teacher/listEvaluation";
 	}
 
@@ -60,10 +62,20 @@ public class TeacherLinkEvaluation {
 	 * 列出评分
 	 * 
 	 * @return
+	 * @throws Exception
 	 */
-	@RequestMapping("/listEvaluation")
-	public String listEvaluation() {
-		return "teacher/listEvaluation";
+	@RequestMapping("/iframeShowEvaluationList")
+	public String listEvaluation(Model model, Integer id) throws Exception {
+		try {
+			TableZongHeCePingChengJiTongJi record = new TableZongHeCePingChengJiTongJi();
+			record.setXueqi(id);
+			List<TableZongHeCePingChengJiTongJi> list = tableZongHeCePingChengJiTongJiService
+					.findTableByXUEQI(record);
+			model.addAttribute("list", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "teacher/iframeShowEvaluationList";
 	}
 
 	/**

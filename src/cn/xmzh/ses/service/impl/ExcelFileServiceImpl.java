@@ -30,8 +30,8 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 	public List<Student> parseExcelFile(InputStream file, Class<Student> clazz)
 			throws Exception {
 		// 初始化表中需要的列
-		String title[] = { "学号", "姓名", "性别", "寝室楼号", "寝室号及床号", "民族", "政治面貌",
-				"联系方式", "是否办理生源地贷款", "特困证明", "身份证号", "银行卡", "家庭详细地址",
+		String title[] = { "学号", "姓名", "班级", "性别", "寝室楼号", "寝室号及床号", "民族",
+				"政治面貌", "联系方式", "是否办理生源地贷款", "特困证明", "身份证号", "银行卡", "家庭详细地址",
 				"户口所在地派出所", "QQ号", "父亲姓名", "母亲姓名", "父亲联系方式", "母亲联系方式" };
 		// 列名与数据库名称中数据的对应
 		Map<String, String> titleMap = new HashMap<String, String>();
@@ -67,33 +67,35 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 				// 从第一行获取标题名称对应工作表中列的下标
 				index = getIndexByTitle(title, sheet.getRow(0));
 				// 判断是否满足至少输入的列数
-				if (getCountOfValidValue(3, index))
-					// 遍历每一行
-					for (int i = 1; i < sheet.getLastRowNum(); i++) {
-						// 读取每一行中的数据
-						Cell cell = null; // 单元格
-						String feildName = null; // 字段名
-						Method method = null; // 单元格的值
-						Student obj = clazz.newInstance();
-						for (int j = 0; j < index.length; j++) {
-							cell = sheet.getRow(i).getCell(j);
-							if (cell != null) {
-								feildName = titleMap.get(title[j]);
-								System.out.println(feildName);
-								if (feildName != null)
-									method = clazz.getMethod(
-											"set"
-													+ feildName.substring(0, 1)
-															.toUpperCase()
-													+ feildName.substring(1),
-											String.class);
-								if (feildName != null && method != null) {
-									method.invoke(obj, getCellValue(cell));
-								}
+				if (!getCountOfValidValue(3, index))
+					continue;
+				// 遍历每一行
+				Row row = null; // 行
+				Cell cell = null; // 单元格
+				Student obj = null; // 学生
+				Method method = null; // 单元格的值
+				String feildName = null; // 字段名
+				String methodName = null; // 方法名
+				for (int i = 1; i < sheet.getLastRowNum(); i++) { // 从第1行开始循环，循环到最后一行
+					obj = clazz.newInstance(); // 创建新的对象
+					row = sheet.getRow(i);
+					for (int j = 0; j < index.length; j++) { // 依次填充每一个字段
+						cell = row.getCell(index[j]); // 获取字段所对应的单元格
+						if (cell != null) {
+							feildName = titleMap.get(title[j]); // 获取列对用POJO的字段名
+							methodName = "set"
+									+ feildName.substring(0, 1).toUpperCase()
+									+ feildName.substring(1);
+							if (feildName != null && cell != null)
+								method = clazz.getMethod(methodName,
+										String.class);
+							if (method != null) {
+								method.invoke(obj, getCellValue(cell));
 							}
 						}
-						list.add(obj);
 					}
+					list.add(obj); // 保存记录
+				}
 			}
 		}
 		return list;
@@ -113,12 +115,14 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 	 * @param row
 	 *            表格中所有已知的列名称
 	 * @return 返回下标
+	 * @throws Exception
 	 */
-	private int[] getIndexByTitle(String[] needTitles, Row row) {
-		// 根据标题名称初始化表格中的列表
-		int[] index = new int[needTitles.length];
+	private int[] getIndexByTitle(String[] needTitles, Row row)
+			throws Exception {
 		if (row == null)
 			return null;
+		// 根据标题名称初始化表格中的列表
+		int[] index = new int[needTitles.length];
 		String[] tableTitles = new String[row.getLastCellNum()];
 		for (int i = 0; i < row.getLastCellNum(); i++) {
 			tableTitles[i] = row.getCell(i).getRichStringCellValue().toString();
@@ -126,16 +130,14 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 		// 初始化下标
 		for (int i = 0; i < index.length; i++)
 			index[i] = -1;
-		if (row != null && needTitles.length > 0)
-			for (int i = 0; i < needTitles.length; i++) {
-				for (int j = 0; j < tableTitles.length; j++) {
-					if (needTitles[i] != null
-							&& needTitles[i].equals(tableTitles[j]))
-						index[i] = j;
-					else
-						continue;
+		for (int i = 0; i < needTitles.length; i++) {
+			for (int j = 0; j < tableTitles.length; j++) {
+				if (needTitles[i].equals(tableTitles[j])) {
+					index[i] = j;
+					continue;
 				}
 			}
+		}
 		return index;
 	}
 

@@ -35,11 +35,10 @@
 
 				<div class="row-fluid filter-block">
 					<div class="ui-select" style="width: 220px;">
-						<select id="class" name="class" onchange="selectClass()">
+						<select id="selectXueqi" name="xueqi" onchange="selectXueQi()">
 							<option>======请选择学期======</option>
-							<c:forEach var="item" varStatus="index" items="${classList }">
-								<option value="${item.classid }">${item.classid }
-									${item.major }</option>
+							<c:forEach var="item" varStatus="index" items="${termList }">
+								<option value="${item.id }">${item.xueqi }</option>
 							</c:forEach>
 						</select>
 					</div>
@@ -50,8 +49,8 @@
 					<iframe name="iframe" style="width: 100%; height: 500px;" src=""></iframe>
 				</div>
 				<form id="form" hidden="hidden" method="post" target="iframe"
-					action="${pageContext.request.contextPath }/iframeShowStudentList.action">
-					<input id="classid" name="classid" hidden="hidden">
+					action="${pageContext.request.contextPath }/iframeShowEvaluationList.action">
+					<input id="xueqi" name="id" hidden="hidden">
 				</form>
 			</div>
 		</div>
@@ -61,7 +60,10 @@
 	<%@ include file="../com/script.jsp"%>
 
 	<script type="text/javascript">
-		
+		function selectXueQi() {
+			$("#xueqi").attr("value", $("#selectXueqi").val());
+			$("#form").submit();
+		}
 	</script>
 </body>
 </html>

@@ -79,6 +79,16 @@ public interface TableZongHeCePingChengJiTongJiMapper {
 			TableZongHeCePingChengJiTongJi record) throws Exception;
 
 	/**
+	 * 根据学期查询所有学生
+	 * 
+	 * @param record
+	 * @return
+	 * @throws Exception
+	 */
+	public List<TableZongHeCePingChengJiTongJi> findTableByXUEQI(
+			TableZongHeCePingChengJiTongJi record) throws Exception;
+
+	/**
 	 * 根据班级和学期查询多条记录
 	 * 
 	 * @param record

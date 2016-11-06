@@ -31,7 +31,7 @@
 		</a>
 			<ul class="submenu">
 				<li><a
-					href="${pageContext.request.contextPath }/listEvaluation.action">查看评分</a></li>
+					href="${pageContext.request.contextPath }/listEvaluationPage.action">查看评分</a></li>
 				<li><a
 					href="${pageContext.request.contextPath }/addEvaluationPage.action">创建评分</a></li>
 				<li><a

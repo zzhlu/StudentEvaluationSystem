@@ -88,6 +88,16 @@ public interface TableZongHeCePingChengJiTongJiService {
 			TableZongHeCePingChengJiTongJi record) throws Exception;
 
 	/**
+	 * 根据学期查询所有人
+	 * 
+	 * @param record
+	 * @return
+	 * @throws Exception
+	 */
+	public List<TableZongHeCePingChengJiTongJi> findTableByXUEQI(
+			TableZongHeCePingChengJiTongJi record) throws Exception;
+
+	/**
 	 * 根据班级号和学期来查询某一个班级的所有学生的详细信息，包括其相关的表记录， 这里需要班级号字段，该字段存储在综合测评成绩统计表中的学号字段中
 	 * 
 	 * @param record

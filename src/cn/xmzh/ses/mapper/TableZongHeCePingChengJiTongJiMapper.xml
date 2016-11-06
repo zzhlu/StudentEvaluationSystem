@@ -160,6 +160,34 @@
 		SELECT * FROM t_zonghecepingchengjitongjibiao WHERE
 		sno=#{sno} AND xueqi=#{xueqi}
 	</select>
+	<!-- 根据学期来查询所有学生 按照成绩排序 -->
+	<select id="findTableByXUEQI" parameterType="tableZongHeCePingChengJiTongJi"
+		resultMap="resultMapUpdate1">
+		SELECT *,
+		mainTable.id as mainTable_id,
+		mainTable.sno as
+		mainTable_s,
+		mainTable.isvalid as mainTable_isvalid,
+		tableStu.sno as
+		tableStu_sno,
+		tableStu.classid as tableStu_classid,
+		tableSZXFXWBF.id as
+		tableSZXFXWBF_id,
+		tableSZXFXWBF.zonghe as tableSZXFXWBF_zonghe,
+		tableSZXFXWBF.isvalid as tableSZXFXWBF_isvalid,
+		tableSZJYJF.id as
+		tableSZJYJF_id,
+		tableSZJYJF.zonghe as tableSZJYJF_zonghe,
+		tableSZJYJF.isvalid as tableSZJYJF_isvalid
+		FROM
+		t_zonghecepingchengjitongjibiao mainTable, t_student tableStu,
+		t_suzhijiaoyujiafenpingfenbiao tableSZJYJF,
+		t_suzhixuefengrichangxingweibufenpingfenbiao tableSZXFXWBF WHERE
+		mainTable.sno = tableStu.sno AND mainTable.id = tableSZJYJF.zonghe
+		AND
+		mainTable.id = tableSZXFXWBF.zonghe
+		AND mainTable.xueqi=#{xueqi}
+	</select>
 	<!-- 根据班级号和学期来查询某一个班级的所有学生，这里需要班级号字段，该字段存储在综合测评成绩统计表中的学号字段中 -->
 	<select id="findTableByClassIDAndXUEQI" parameterType="tableZongHeCePingChengJiTongJi"
 		resultType="tableZongHeCePingChengJiTongJi">
