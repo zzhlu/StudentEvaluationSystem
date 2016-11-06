@@ -22,22 +22,4 @@ public class StudentEditProfile {
 	@Autowired
 	private TableSuZhiJiaoYuJiaFenShenQingService tableSuZhiJiaoYuJiaFenShenQingService;
 
-	@RequestMapping("/editProfilePage")
-	public String editProfilePage() throws Exception {
-		return "student/editProfile";
-	}
-
-	@RequestMapping("/editProfile")
-	public String editProfile(HttpServletRequest request,
-			TableSuZhiJiaoYuJiaFenShenQing table, MultipartFile file)
-			throws Exception {
-		System.out.println("程序运行到此处了！");
-		// Student student = (Student)
-		// request.getSession().getAttribute("user");
-		System.out.println(tableSuZhiJiaoYuJiaFenShenQingService.findAll());
-		table.setFilePath("/");
-		System.out.println(table);
-		System.out.println(file.getSize());
-		return "student/editProfile";
-	}
 }

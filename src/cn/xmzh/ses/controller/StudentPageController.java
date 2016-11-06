@@ -19,4 +19,13 @@ public class StudentPageController {
 		return "student/index";
 	}
 
+	@RequestMapping("message")
+	public String message() {
+		return "student/message";
+	}
+
+	@RequestMapping("messageTag")
+	public String messageTag() {
+		return "student/Message";
+	}
 }

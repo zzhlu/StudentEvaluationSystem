@@ -4,7 +4,8 @@
 	<div class="mainNav">
 		<div class="user">
 			<a title="" class="leftUserDrop"><img src="images/user.png"
-				alt="" /><span><strong>3</strong></span></a><span>${user.name } 同学</span>
+				alt="" /><span><strong>3</strong></span></a><span>${user.name }
+				同学</span>
 			<ul class="leftUser">
 				<li><a href="#" title="" class="sProfile">我的信息</a></li>
 				<li><a href="#" title="" class="sMessages">我的通知</a></li>
@@ -36,9 +37,12 @@
 				href="${pageContext.request.contextPath }/student/classMatePage.action"
 				title=""><img src="images/icons/mainnav/ui.png" alt="" /><span>同学</span></a></li>
 			<li><a
-				href="${pageContext.request.contextPath }/student/editProfilePage.action"
+				href="${pageContext.request.contextPath }/student/editScoreApplyPage.action"
 				title=""><img src="images/icons/mainnav/forms.png" alt="" /><span>
 						编辑</span></a></li>
+			<li><a
+				href="${pageContext.request.contextPath }/student/scoreMaintainPage.action"
+				title=""><img src="images/icons/mainnav/messages.png" alt="" /><span>消息</span></a></li>
 			<li><a
 				href="${pageContext.request.contextPath }/student/scoreMaintainPage.action"
 				title=""><img src="images/icons/mainnav/statistics.png" alt="" /><span>成绩</span></a></li>

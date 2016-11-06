@@ -40,7 +40,7 @@
 		<div id="stuff">
 			<div class="sideWidget">
 				<form method="post" enctype="multipart/form-data"
-					action="${pageContext.request.contextPath }/student/editProfile.action">
+					action="${pageContext.request.contextPath }/student/editScoreApply.action">
 
 					<table>
 						<tr>
@@ -53,17 +53,18 @@
 							<td><label>素质教育加分类别:</label></td>
 							<td><div class="formRow">
 									<select name="type">
-										<option value="opt1">社会服务</option>
-										<option value="opt2">志愿服务</option>
-										<option value="opt3">比赛获奖</option>
-										<option value="opt4">学生干部</option>
+										<option value="社会服务">社会服务</option>
+										<option value="志愿服务">志愿服务</option>
+										<option value="比赛获奖">比赛获奖</option>
+										<option value="学生干部">学生干部</option>
 									</select>
 								</div></td>
 							<td><label>级别:</label></td>
 							<td><div class="formRow">
 									<select name="level">
-										<option value="opt1">校级</option>
-										<option value="opt2">国家级</option>
+										<option value="校级">校级</option>
+										<option value="省级">省级</option>
+										<option value="国家级">国家级</option>
 									</select>
 								</div></td>
 						</tr>
@@ -81,8 +82,8 @@
 							<td><label>加分认定:</label></td>
 							<td><div class="formRow">
 									<select name="level">
-										<option value="opt1">校级</option>
-										<option value="opt2">国家级</option>
+										<option value="校级">校级</option>
+										<option value="国家级">国家级</option>
 									</select>
 								</div></td>
 							<td><label>证明文件:</label></td>
@@ -93,7 +94,7 @@
 						<tr>
 							<td style="text-align:justify;"><label>加分依据:</label></td>
 							<td colspan="3"><div class="formRow">
-									<textarea rows="8" cols="" name="evidence" placeholder="请阐述。。。"></textarea>
+									<textarea rows="8" name="evidence" placeholder="请阐述。。。"></textarea>
 								</div></td>
 						</tr>
 						<tr>
