@@ -16,13 +16,13 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th class="span3"><span class="line"></span>序号</th>
-						<th class="span3"><span class="line"></span>学号</th>
-						<th class="span3"><span class="line"></span>姓名</th>
-						<th class="span3"><span class="line"></span>性别</th>
-						<th class="span3"><span class="line"></span>民族</th>
+						<th class="span1"><span class="line"></span>序号</th>
+						<th class="span1"><span class="line"></span>学号</th>
+						<th class="span2"><span class="line"></span>姓名</th>
+						<th class="span1"><span class="line"></span>性别</th>
+						<th class="span1"><span class="line"></span>民族</th>
+						<th class="span2"><span class="line"></span>寝室</th>
 						<th class="span3"><span class="line"></span>电话</th>
-						<th class="span3"><span class="line"></span>QQ号</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,8 +38,8 @@
 									${item.name }</a></td>
 							<td>${item.gender }</td>
 							<td>${item.nation }</td>
+							<td>${item.dormno }#${item.dorminfo }</td>
 							<td>${item.phone }</td>
-							<td>${item.qqNumb }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
