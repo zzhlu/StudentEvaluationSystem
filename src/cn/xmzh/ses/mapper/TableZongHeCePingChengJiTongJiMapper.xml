@@ -67,6 +67,18 @@
 			<result column="bisaihuojiang" property="bisaihuojiang" />
 			<result column="xueshengganbu" property="xueshengganbu" />
 			<result column="tableSZJYJF_isvalid" property="isvalid" />
+			<collection property="tableSZJYJFSQ" javaType="tableSuZhiJiaoYuJiaFenShenQing">
+				<id column="tableSZJYJFSQ_id" property="id" />
+				<result column="tableSZJYJFSQ_suzhi" property="suzhi" />
+				<result column="tableSZJYJFSQ_name" property="name" />
+				<result column="tableSZJYJFSQ_type" property="type" />
+				<result column="tableSZJYJFSQ_time" property="time" />
+				<result column="tableSZJYJFSQ_level" property="level" />
+				<result column="tableSZJYJFSQ_evidence" property="evidence" />
+				<result column="tableSZJYJFSQ_filePath" property="filePath" />
+				<result column="tableSZJYJFSQ_score" property="score" />
+				<result column="tableSZJYJFSQ_isvalid" property="isvalid" />
+			</collection>
 		</association>
 	</resultMap>
 
@@ -131,28 +143,29 @@
 	</select>
 	<!-- 根据学生学号查询多条记录 -->
 	<select id="findTableBySNO" parameterType="string" resultMap="resultMap">
-		SELECT
-		*,
+		SELECT *,
 		mainTable.id as mainTable_id,
-		mainTable.isvalid as
-		mainTable_isvalid,
-		tableSZXFXWBF.id as tableSZXFXWBF_id,
+		mainTable.sno as mainTable_s,
+		mainTable.isvalid as mainTable_isvalid,
+		tableStu.sno as tableStu_sno,
+		tableStu.classid as tableStu_classid,
+		tableSZXFXWBF.id as
+		tableSZXFXWBF_id,
 		tableSZXFXWBF.zonghe as tableSZXFXWBF_zonghe,
-		tableSZXFXWBF.isvalid as
-		tableSZXFXWBF_isvalid,
-		tableSZJYJF.id as tableSZJYJF_id,
+		tableSZXFXWBF.isvalid as tableSZXFXWBF_isvalid,
+		tableSZJYJF.id as
+		tableSZJYJF_id,
 		tableSZJYJF.zonghe as tableSZJYJF_zonghe,
-		tableSZJYJF.isvalid as
-		tableSZJYJF_isvalid
+		tableSZJYJF.isvalid as tableSZJYJF_isvalid
 		FROM
-		t_zonghecepingchengjitongjibiao mainTable
-		left
-		join
-		t_suzhixuefengrichangxingweibufenpingfenbiao tableSZXFXWBF on
-		tableSZXFXWBF.zonghe
-		left join t_suzhijiaoyujiafenpingfenbiao
-		tableSZJYJF on tableSZJYJF.zonghe
-		WHERE sno=#{value}
+		t_zonghecepingchengjitongjibiao mainTable, t_student tableStu,
+		t_suzhijiaoyujiafenpingfenbiao tableSZJYJF,
+		t_suzhixuefengrichangxingweibufenpingfenbiao tableSZXFXWBF WHERE
+		mainTable.sno = tableStu.sno AND mainTable.id = tableSZJYJF.zonghe
+		AND
+		mainTable.id = tableSZXFXWBF.zonghe
+		AND
+		tableStu.sno=#{sno}
 	</select>
 	<!-- 根据学号和学期查询单条记录 (学号和学期是必须具有的参数) -->
 	<select id="findTableBySNOAndXUEQI" parameterType="tableZongHeCePingChengJiTongJi"

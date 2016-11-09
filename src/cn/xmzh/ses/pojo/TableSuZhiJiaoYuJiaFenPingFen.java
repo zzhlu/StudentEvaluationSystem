@@ -17,7 +17,7 @@ public class TableSuZhiJiaoYuJiaFenPingFen {
 	private Double xueshengganbu; // 学生干部
 	private Integer isvalid; // 标志该表是否有效
 
-	private List<TableSuZhiJiaoYuJiaFenShenQing> table; // 素质教育加分申请表
+	private List<TableSuZhiJiaoYuJiaFenShenQing> tableSZJYJFSQ;// 素质教育加分申请表
 
 	public TableSuZhiJiaoYuJiaFenPingFen() {
 	}
@@ -103,12 +103,13 @@ public class TableSuZhiJiaoYuJiaFenPingFen {
 		this.isvalid = isvalid;
 	}
 
-	public List<TableSuZhiJiaoYuJiaFenShenQing> getTable() {
-		return table;
+	public List<TableSuZhiJiaoYuJiaFenShenQing> getTableSZJYJFSQ() {
+		return tableSZJYJFSQ;
 	}
 
-	public void setTable(List<TableSuZhiJiaoYuJiaFenShenQing> table) {
-		this.table = table;
+	public void setTableSZJYJFSQ(
+			List<TableSuZhiJiaoYuJiaFenShenQing> tableSZJYJFSQ) {
+		this.tableSZJYJFSQ = tableSZJYJFSQ;
 	}
 
 	@Override
@@ -117,7 +118,7 @@ public class TableSuZhiJiaoYuJiaFenPingFen {
 				+ ", shehuifuwu=" + shehuifuwu + ", shehuishijian="
 				+ shehuishijian + ", bisaihuojiang=" + bisaihuojiang
 				+ ", xueshengganbu=" + xueshengganbu + ", isvalid=" + isvalid
-				+ "]";
+				+ ", tableSZJYJFSQ=" + tableSZJYJFSQ + "]";
 	}
 
 }

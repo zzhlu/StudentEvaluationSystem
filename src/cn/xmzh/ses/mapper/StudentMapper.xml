@@ -93,4 +93,8 @@
 		SET password=#{password}
 		WHERE sno=#{sno}
 	</update>
+	<delete id="deleteStudentBySno" parameterType="string">
+		DELETE FROM
+		t_student WHERE sno=#{value}
+	</delete>
 </mapper>

@@ -39,12 +39,17 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public void updateStudentPassword(Student student) throws Exception {
-
+		studentMapper.updateStudentPassword(student);
 	}
 
 	@Override
 	public List<Student> findStudentByClassID(String classid) throws Exception {
 		return studentMapper.findStudentByClassID(classid);
+	}
+
+	@Override
+	public void deleteStudentBySno(String sno) throws Exception {
+		studentMapper.deleteStudentBySno(sno);
 	}
 
 }

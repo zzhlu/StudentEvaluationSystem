@@ -1,7 +1,5 @@
 package cn.xmzh.ses.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.xmzh.ses.mapper.TableSuZhiJiaoYuJiaFenPingFenMapper;

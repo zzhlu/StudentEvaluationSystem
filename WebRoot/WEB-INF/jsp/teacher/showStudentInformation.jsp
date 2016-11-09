@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- css file -->
 <%@ include file="../com/css.jsp"%>
+<link rel="stylesheet" href="css/compiled/form-showcase.css"
+	type="text/css" media="screen" />
+<link href="css/lib/uniform.default.css" type="text/css"
+	rel="stylesheet" />
+<link href="css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
+<link href="css/lib/select2.css" type="text/css" rel="stylesheet" />
+
 </head>
 <style>
 table {
@@ -37,113 +45,126 @@ td {
 
 	<!-- main container -->
 	<div class="content">
+
 		<div class="container-fluid">
-			<div id="pad-wrapper" class="new-user">
-				<div class="row-fluid header">
-					<h3>${student.name }同学详细信息</h3>
-				</div>
+			<div id="pad-wrapper" class="form-page">
 				<div class="row-fluid form-wrapper">
 					<!-- left column -->
-					<div class="span9 with-sidebar">
-						<div class="container">
-							<form method="post" class="new_user_form inline-input"
-								action="${pageContext.request.contextPath }/addStudent.action">
-								<table>
-									<tr>
-										<td style="width: 20%;" rowspan="7" colspan="2"><img
-											style="width: 58px; height: 120px;"
-											src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white.png" /></td>
-										<td style="width: 20%;">班级</td>
-										<td style="width: 60%;">13030504</td>
-									</tr>
-									<tr>
-										<td>学号</td>
-										<td><input name="sno" type="text" value="${student.sno }" /></td>
-									</tr>
-									<tr>
-										<td>姓名</td>
-										<td><input name="name" type="text"
-											value="${student.name }" /></td>
-									</tr>
-									<tr>
-										<td>性别</td>
-										<td><input name="gender" type="text"
-											value="${student.gender }" /></td>
-									</tr>
-									<tr>
-										<td>民族</td>
-										<td><input name="nation" type="text"
-											value="${student.nation }" /></td>
-									</tr>
-									<tr>
-										<td>电话</td>
-										<td><input name="phone" type="text"
-											value="${student.phone }" /></td>
-									</tr>
-									<tr>
-										<td>QQ号</td>
-										<td><input name="qqNumb" type="text"
-											value="${student.qqNumb }" /></td>
-									</tr>
-									<tr>
-										<td style="width: 20%;">楼层</td>
-										<td style="width: 30%;"><input name="dormno" type="text"
-											value="${student.dormno }" /></td>
-										<td style="width: 20%;">寝室</td>
-										<td style="width: 30%;"><input name="dorminfo"
-											type="text" value="${student.dorminfo }" /></td>
-									</tr>
-									<tr>
-										<td style="width: 20%;">身份证号</td>
-										<td style="width: 30%;"><input name="idCard" type="text"
-											value="${student.idCard }" /></td>
-										<td style="width: 20%;">银行卡号</td>
-										<td style="width: 30%;"><input name="bankcard"
-											type="text" value="${student.bankCard }" /></td>
-									</tr>
-									<tr>
-										<td style="width: 20%;">是否有贫困证明</td>
-										<td style="width: 30%;"><input
-											name="havePovertyCertificate" type="text"
-											value="${student.havePovertyCertificate }" /></td>
-										<td style="width: 20%;">是否申请助学贷款</td>
-										<td style="width: 30%;"><input name="haveLoan"
-											type="text" value="${student.haveLoan }" /></td>
-									</tr>
-									<tr>
-										<td style="width: 20%;">父亲姓名</td>
-										<td style="width: 30%;"><input name="fatherName"
-											type="text" value="${student.fatherName }" /></td>
-										<td style="width: 20%;">联系方式</td>
-										<td style="width: 30%;"><input name="fatherPhone"
-											type="text" value="${student.fatherPhone }" /></td>
-									</tr>
-									<tr>
-										<td style="width: 20%;">母亲姓名</td>
-										<td style="width: 30%;"><input name="motherName"
-											type="text" value="${student.motherName }" /></td>
-										<td style="width: 20%;">联系方式</td>
-										<td style="width: 30%;"><input name="motherPhone"
-											type="text" value="${student.motherPhone }" /></td>
-									</tr>
-
-									<tr>
-										<td colspan="2" style="width: 20%;">家庭住址</td>
-										<td colspan="2" style="width: 80%;"><input
-											name="residenceRegistrationAddress" type="text"
-											value="${student.residenceRegistrationAddress }" /></td>
-									</tr>
-								</table>
-							</form>
-						</div>
+					<div class="span8 column">
+						<form method="post"
+							action="${pageContext.request.contextPath }updateStudentInformation">
+							<div class="field-box">
+								<label>姓名:</label> <input name="name" value="${student.name }"
+									class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>班级:</label> <input name="classid"
+									value="${student.classid }" class="span8 inline-input"
+									type="text" readonly="readonly" />
+							</div>
+							<div class="field-box">
+								<label>学号:</label> <input name="sno" value="${student.sno }"
+									class="span8 inline-input" type="text" readonly="readonly" />
+							</div>
+							<div class="field-box">
+								<label>性别:</label>
+								<div class="ui-select">
+									<select name="gender">
+										<c:choose>
+											<c:when test="${student.gender == '男' }">
+												<option value="男" selected="selected">男</option>
+												<option value="女">女</option>
+											</c:when>
+											<c:otherwise>
+												<option value="女" selected="selected">女</option>
+												<option value="男">男</option>
+											</c:otherwise>
+										</c:choose>
+									</select>
+								</div>
+							</div>
+							<div class="field-box">
+								<label>民族:</label> <input name="nation"
+									value="${student.nation }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>电话:</label> <input name="phone" value="${student.phone }"
+									class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>QQ号:</label> <input name="qqNumb"
+									value="${student.qqNumb }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>楼层:</label> <input name="dormno"
+									value="${student.dormno }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>寝室:</label> <input name="dorminfo"
+									value="${student.dorminfo }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>身份证号:</label> <input name="idCard"
+									value="${student.idCard }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>银行卡号:</label> <input name="bankCard"
+									value="${student.bankCard }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>家庭住址:</label> <input name="address"
+									value="${student.address }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>户口所在地:</label> <input name="residenceRegistrationAddress"
+									value="${student.residenceRegistrationAddress }" class="span8"
+									type="text" />
+							</div>
+							<div class="field-box">
+								<label>是否有贫困证明:</label> <input name="havePovertyCertificate"
+									value="${student.havePovertyCertificate }" class="span8"
+									type="text" />
+							</div>
+							<div class="field-box">
+								<label>是否申请助学贷款:</label> <input name="haveLoan"
+									value="${student.haveLoan }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>父亲姓名:</label> <input name="fatherName"
+									value="${student.fatherName }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>母亲姓名:</label> <input name="motherName"
+									value="${student.motherName }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>父亲联系方式:</label> <input name="fatherPhone"
+									value="${student.fatherPhone }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<label>母亲联系方式:</label> <input name="motherPhone"
+									value="${student.motherPhone }" class="span8" type="text" />
+							</div>
+							<div class="field-box">
+								<input class="btn-flat primary" type="submit" value="  保存当前信息  ">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
+									class="btn-flat gray" type="reset" value="  重置变动内容  ">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+									class="btn-flat inverse" type="button" value="  删除当前学生  ">
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
 	<!-- scripts -->
 	<%@ include file="../com/script.jsp"%>
+	<script src="js/jquery.uniform.min.js"></script>
+	<script src="js/select2.min.js"></script>
+	<script>
+		// add uniform plugin styles to html elements
+		$("input:checkbox, input:radio").uniform();
+	</script>
 </body>
 </html>

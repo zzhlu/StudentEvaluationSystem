@@ -3,6 +3,8 @@ package cn.xmzh.ses.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +14,16 @@ import org.springframework.web.multipart.MultipartFile;
 import cn.xmzh.ses.pojo.Page;
 import cn.xmzh.ses.pojo.Student;
 import cn.xmzh.ses.pojo.TClass;
+import cn.xmzh.ses.pojo.TableSuZhiJiaoYuJiaFenShenQing;
+import cn.xmzh.ses.pojo.TableZongHeCePingChengJiTongJi;
 import cn.xmzh.ses.service.ExcelFileService;
 import cn.xmzh.ses.service.StudentService;
 import cn.xmzh.ses.service.TClassService;
+import cn.xmzh.ses.service.TableSuZhiJiaoYuJiaFenPingFenService;
+import cn.xmzh.ses.service.TableSuZhiJiaoYuJiaFenShenQingService;
+import cn.xmzh.ses.service.TableSuZhiXueFenRiChangXingWeiBuFenPingFenService;
+import cn.xmzh.ses.service.TableZongHeCePingChengJiTongJiService;
+import cn.xmzh.ses.service.TermService;
 
 /**
  * 与老师有关的学生管理链接
@@ -26,11 +35,21 @@ import cn.xmzh.ses.service.TClassService;
 public class TeacherLinkStudentManager {
 
 	@Autowired
-	private StudentService studentService;
+	private TermService termService;
 	@Autowired
 	private TClassService tClassService;
 	@Autowired
+	private StudentService studentService;
+	@Autowired
 	private ExcelFileService excelFileService;
+	@Autowired
+	private TableSuZhiJiaoYuJiaFenPingFenService tableSuZhiJiaoYuJiaFenPingFenService;
+	@Autowired
+	private TableSuZhiJiaoYuJiaFenShenQingService tableSuZhiJiaoYuJiaFenShenQingService;
+	@Autowired
+	private TableZongHeCePingChengJiTongJiService tableZongHeCePingChengJiTongJiService;
+	@Autowired
+	private TableSuZhiXueFenRiChangXingWeiBuFenPingFenService tableSuZhiXueFenRiChangXingWeiBuFenPingFenService;
 
 	/**
 	 * 打开添加学生页面
@@ -68,6 +87,67 @@ public class TeacherLinkStudentManager {
 		model.addAttribute("showTip", "true");
 		// 返回操作信息
 		return "teacher/addStudent";
+	}
+
+	/**
+	 * 删除学生信息
+	 * 
+	 * @param model
+	 * @param student
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/deleteStudent")
+	public String deleteStudent(Model model, String sno) throws Exception {
+		try {
+			Student student = studentService.findStudentBySno(sno);
+			if (student == null)
+				throw new Exception("该生不存在");
+			// 删除与该生相关的数据库记录
+			List<TableZongHeCePingChengJiTongJi> tableZHCPCJTJList = tableZongHeCePingChengJiTongJiService
+					.findTableBySNO(sno);
+			for (TableZongHeCePingChengJiTongJi list : tableZHCPCJTJList) {
+				tableSuZhiXueFenRiChangXingWeiBuFenPingFenService
+						.deleteByID(list.getTableSZXFXWBF().getId());
+				for (TableSuZhiJiaoYuJiaFenShenQing var : list.getTableSZJYJF()
+						.getTableSZJYJFSQ())
+					tableSuZhiJiaoYuJiaFenShenQingService.deleteByID(var
+							.getId());
+				tableSuZhiJiaoYuJiaFenPingFenService.deleteByID(list
+						.getTableSZJYJF().getId());
+				tableZongHeCePingChengJiTongJiService.deleteTable(list.getId());
+			}
+			// 从数据库中删除该生的记录
+			studentService.deleteStudentBySno(student.getSno());
+		} catch (Exception e) {
+			model.addAttribute("tip", "删除失败！");
+		}
+		return "forward:showStudentInformation.action";
+	}
+
+	/**
+	 * 修改学生信息
+	 * 
+	 * @param request
+	 * @param model
+	 * @param student
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/updateStudentInformation")
+	public String updateStudentInformation(HttpServletRequest request,
+			Model model, Student student) throws Exception {
+		try {
+			if (student == null || student.getSno() == null
+					|| student.getClassid() == null)
+				throw new Exception("缺乏重要参数！");
+			studentService.updateStudentBySno(student);
+			request.setAttribute("sno", student.getSno());
+		} catch (Exception e) {
+			model.addAttribute("tip", "信息修改失败！");
+			request.setAttribute("sno", student.getSno());
+		}
+		return "forward:showStudentInformation.action";
 	}
 
 	/**

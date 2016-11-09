@@ -60,4 +60,12 @@ public interface StudentMapper {
 	 */
 	public void updateStudentPassword(Student student) throws Exception;
 
+	/**
+	 * 删除学生信息
+	 * 
+	 * @param id
+	 * @throws Exception
+	 */
+	public void deleteStudentBySno(String sno) throws Exception;
+
 }
